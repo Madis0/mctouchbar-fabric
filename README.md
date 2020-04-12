@@ -1,16 +1,14 @@
-# Fabric Example Mod
+# MCTouchbar
+Hey! This is my project. This project adds support to the Touchbar on some MacBook models.
 
-## Setup
+It's structured in a way that allows other mods to add their own widgets if they please.
 
-1. Edit build.gradle and mod.json to suit your needs.
-    * The "mixins" object can be removed from mod.json if you do not need to use mixins.
-    * Please replace all occurences of "modid" with your own mod ID - sometimes, a different string may also suffice.
-2. Run the following command:
 
-```
-./gradlew idea
-```
+##Links
+[My project on CurseForge](https://www.curseforge.com/minecraft/mc-mods/mctouchbar)
 
-## License
+##Extra Notes
+Feel free to include this in modpacks!
+Let me know if you do cause I wanna see! xP
 
-This template is available under the CC0 license. Feel free to learn from it and incorporate it in your own projects.
+This is currently under construction so
