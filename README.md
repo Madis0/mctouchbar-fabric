@@ -4,11 +4,13 @@ Hey! This is my project. This project adds support to the Touchbar on some MacBo
 It's structured in a way that allows other mods to add their own widgets if they please.
 
 
-##Links
+## Links
 [My project on CurseForge](https://www.curseforge.com/minecraft/mc-mods/mctouchbar)
 
-##Extra Notes
+## Extra Notes
 Feel free to include this in modpacks!
 Let me know if you do cause I wanna see! xP
+
+
 
 This is currently under construction so

@@ -91,6 +91,8 @@ public class MCTouchbarModMenuApiImpl implements ModMenuApi {
         builder.setSavingRunnable(() -> {
             MCTouchbar.saveConfig(MCTouchbar.CFG_FILE);
             MinecraftClient.getInstance().openScreen(this.create(this.parentScreen));
+
+            MCTouchbar.regenTouchbar();
         });
 
         ClothConfigScreen scr = (ClothConfigScreen) builder.build();

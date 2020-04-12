@@ -6,7 +6,8 @@
   "mixins": [
   ],
   "client": [
-    "WindowMixin"
+    "WindowMixin",
+    "LanguageManagerMixin"
   ],
   "injectors": {
     "defaultRequire": 1

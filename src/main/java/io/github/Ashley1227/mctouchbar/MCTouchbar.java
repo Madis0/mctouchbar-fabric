@@ -1,9 +1,14 @@
 package io.github.Ashley1227.mctouchbar;
 
 import io.github.Ashley1227.mctouchbar.config.MCTouchbarConfig;
+import io.github.Ashley1227.mctouchbar.widget.Widget;
 import io.github.Ashley1227.mctouchbar.widget.Widgets;
+import io.github.Ashley1227.mctouchbar.widget.config.WidgetConfig;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.client.resource.language.I18n;
+import net.minecraft.client.resource.language.LanguageManager;
+import net.minecraft.util.Language;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -22,7 +27,7 @@ public class MCTouchbar implements ClientModInitializer {
 	public static final File CFG_FILE = new File(FabricLoader.getInstance().getConfigDirectory(), "mctouchbar.json");
 	public static MCTouchbarConfig config = new MCTouchbarConfig();
 
-	public static long handle;
+	private static long handle;
 	public static JTouchBar jTouchBar;
 
 	public static final Logger LOGGER = LogManager.getLogger(MCTouchbar.class);
@@ -34,30 +39,20 @@ public class MCTouchbar implements ClientModInitializer {
 		loadConfig(CFG_FILE);
 		LOGGER.debug("MCTouchbar initialized");
 	}
-	public static void onWindowLoad(long handle) {
-		MCTouchbar.handle = handle;
-
-		jTouchBar = new JTouchBar();
-
-		jTouchBar.setCustomizationIdentifier("MCTouchbar");
-
-		TouchBarButton optionsBtn = new TouchBarButton();
-		optionsBtn.setTitle("Touchbar Options");
-
-		optionsBtn.setAction(new TouchBarViewAction() {
-			@Override
-			public void onCall( TouchBarView view ) {
-//				MinecraftClient.getInstance().openScreen(new OptionsScreen(new OptionsGui()));
-				System.out.println("fortnite");
-			}
-		});
-
-		jTouchBar.addItem(new TouchBarItem("optionsBtn", optionsBtn, true));
-
-		jTouchBar.show(
-				GLFWNativeCocoa.glfwGetCocoaWindow(handle)
-		);
+	public static void onWindowLoad(long handleOwO) {
+		handle = handleOwO;
 	}
+	public static void regenTouchbar() {
+		jTouchBar = new JTouchBar();
+		for(int i = 0; i < config.widgets.size(); i++) {
+			Widget w = config.widgets.get(i);
+			WidgetConfig c = config.config.get(i);
+
+			w.addToTouchbar(jTouchBar);
+		}
+		jTouchBar.show(GLFWNativeCocoa.glfwGetCocoaWindow(handle));
+	}
+
 	public static void loadConfig(File file) {
 		config = config.readFromJSON(file);
 		if(config == null) {
