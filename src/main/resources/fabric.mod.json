@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "id": "mctouchbar",
+  "version": "${version}",
+
+  "name": "MCTouchbar",
+  "description": "Adds support to the MacBook Pro Touchbar in Minecraft",
+  "authors": [
+    "Ashley1227"
+  ],
+  "contact": {
+    "homepage": "https://Ashley1227.github.io/",
+    "sources": "https://github.com/Ashley1227/mctouchbar-fabric/",
+    "issues": "https://github.com/Ashley1227/mctouchbar-fabric/issues"
+  },
+
+  "license": "CC0-1.0",
+  "icon": "assets/mctouchbar/icon.png",
+
+  "environment": "*",
+  "entrypoints": {
+    "client": [
+      "io.github.Ashley1227.mctouchbar.MCTouchbar"
+    ], "modmenu": [
+      "io.github.Ashley1227.mctouchbar.MCTouchbarModMenuApiImpl"
+    ]
+
+  },
+  "mixins": ["mctouchbar.mixins.json"],
+
+  "depends": {
+    "fabricloader": ">=0.4.0",
+    "fabric": "*"
+  },
+  "suggests": {
+    "flamingo": "*"
+  },
+  "custom": {
+    "modmenu:api": false,
+    "modmenu:clientsideOnly": true
+  }
+}
