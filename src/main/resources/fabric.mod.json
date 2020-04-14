@@ -14,7 +14,7 @@
     "issues": "https://github.com/Ashley1227/mctouchbar-fabric/issues"
   },
 
-  "license": "CC0-1.0",
+  "license": "CC BY-NC",
   "icon": "assets/mctouchbar/icon.png",
 
   "environment": "*",
@@ -33,7 +33,6 @@
     "fabric": "*"
   },
   "suggests": {
-    "flamingo": "*"
   },
   "custom": {
     "modmenu:api": false,

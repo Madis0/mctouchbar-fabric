@@ -23,5 +23,9 @@
   "category.mctouchbar.widget8": "8",
   "category.mctouchbar.widget9": "9",
 
-  "widget.mctouchbar.debug": "Debug Toggle"
+  "widget.mctouchbar.debug": "Debug",
+  "widget.mctouchbar.test": "Test",
+
+  "widget.mctouchbar.command": "Command",
+  "widget.mctouchbar.command.command": "Command"
 }

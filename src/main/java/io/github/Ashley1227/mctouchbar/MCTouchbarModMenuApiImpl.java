@@ -20,6 +20,7 @@ import me.shedaniel.clothconfig2.api.ConfigEntryBuilder;
 import net.minecraft.client.gui.screen.SettingsScreen;
 import net.minecraft.util.Identifier;
 
+import java.util.ArrayList;
 import java.util.stream.Collectors;
 
 public class MCTouchbarModMenuApiImpl implements ModMenuApi {
@@ -44,7 +45,7 @@ public class MCTouchbarModMenuApiImpl implements ModMenuApi {
         ConfigEntryBuilder entryBuilder = builder.entryBuilder();
         ConfigCategory general = builder.getOrCreateCategory("category." + MCTouchbar.MODID + ".general");
 
-//        SettingsScreen
+        general.addEntry(entryBuilder.startTextDescription("Might add stuff here later lol").build());
 
         this.parentScreen = screen;
 
@@ -69,12 +70,32 @@ public class MCTouchbarModMenuApiImpl implements ModMenuApi {
                                     widgetConfig.set(entry.translationKey, thing);
                                 }).build());
                         break;
+                    case INT_SLIDER:
+                        if (entry.hasProperties("min", "max")) {
+                            c.addEntry(entryBuilder.startIntSlider(entry.translationKey, (int) currValue, (int) entry.get("min"), (int) entry.get("max"))
+                                    .setDefaultValue((int) entry.defaultValue)
+                                    .setSaveConsumer(thing -> {
+                                        widgetConfig.set(entry.translationKey, thing);
+                                    }).build());
+                        } else {
+                            MCTouchbar.LOGGER.warn("[MCTouchbar] The widget " + w + " has config entry " + entry + " which does not have the correct properties. Skipping this entry.");
+                        }
+                        break;
+                    case DOUBLE:
+                        c.addEntry(entryBuilder.startDoubleField(entry.translationKey, (double) currValue)
+                                .setDefaultValue((double) entry.defaultValue)
+                                .setSaveConsumer(thing -> {
+                                    widgetConfig.set(entry.translationKey, thing);
+                                }).build());
+                        break;
                     case BOOLEAN:
+
                         c.addEntry(entryBuilder.startBooleanToggle(entry.translationKey, (boolean) currValue)
                                 .setDefaultValue((boolean) entry.defaultValue)
                                 .setSaveConsumer(thing -> {
                                     widgetConfig.set(entry.translationKey, thing);
                                 }).build());
+
                         break;
                     case STRING:
                         c.addEntry(entryBuilder.startStrField(entry.translationKey, (String) currValue)
@@ -99,8 +120,6 @@ public class MCTouchbarModMenuApiImpl implements ModMenuApi {
         scr.selectedTabIndex = lastTabIndex;
         scr.nextTabIndex = lastTabIndex + 1;
 
-        MCTouchbar.LOGGER.info(lastTabIndex);
-
         return scr;
     }
 
@@ -119,7 +138,7 @@ public class MCTouchbarModMenuApiImpl implements ModMenuApi {
                 .setDefaultValue(Widgets.DEFAULT)
                 .setSelections(MCTouchbarRegistry.WIDGET.stream().collect(Collectors.toSet()))
                 .setSaveConsumer(string -> {
-                    if(MCTouchbar.config.widgets.get(number) != MCTouchbarRegistry.WIDGET.get(new Identifier((String) string))) {
+                    if (MCTouchbar.config.widgets.get(number) != MCTouchbarRegistry.WIDGET.get(new Identifier((String) string))) {
                         MCTouchbar.config.widgets.set(number, MCTouchbarRegistry.WIDGET.get(new Identifier((String) string)));
                         MCTouchbar.config.config.set(number, WidgetConfig.fromOutline(MCTouchbarRegistry.WIDGET.get(new Identifier((String) string)).outline));
                         this.lastTabIndex = number;

@@ -20,8 +20,12 @@ public class WidgetSerializer extends StdSerializer<Widget> {
     @Override
     public void serialize(Widget widget, JsonGenerator jgen, SerializerProvider provider) throws IOException, JsonGenerationException {
         jgen.writeStartObject();
-        jgen.writeObjectField("identifier",widget.getIdentifier());
-//        jgen.writeObjectField("config",widget.config);
+
+        jgen.writeObjectFieldStart("identifier");
+        jgen.writeStringField("namespace", widget.getIdentifier().getNamespace());
+        jgen.writeStringField("path", widget.getIdentifier().getPath());
+        jgen.writeEndObject();
+
         jgen.writeEndObject();
     }
 }

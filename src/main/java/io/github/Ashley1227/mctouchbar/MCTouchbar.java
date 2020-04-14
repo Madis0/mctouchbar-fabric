@@ -1,13 +1,25 @@
 package io.github.Ashley1227.mctouchbar;
 
+import com.thizzer.jtouchbar.common.Image;
+import com.thizzer.jtouchbar.common.ImageAlignment;
+import com.thizzer.jtouchbar.common.ImageName;
+import com.thizzer.jtouchbar.item.view.TouchBarScrubber;
+import com.thizzer.jtouchbar.scrubber.ScrubberActionListener;
+import com.thizzer.jtouchbar.scrubber.ScrubberDataSource;
+import com.thizzer.jtouchbar.scrubber.view.ScrubberImageItemView;
+import com.thizzer.jtouchbar.scrubber.view.ScrubberTextItemView;
+import com.thizzer.jtouchbar.scrubber.view.ScrubberView;
 import io.github.Ashley1227.mctouchbar.config.MCTouchbarConfig;
 import io.github.Ashley1227.mctouchbar.widget.Widget;
 import io.github.Ashley1227.mctouchbar.widget.Widgets;
 import io.github.Ashley1227.mctouchbar.widget.config.WidgetConfig;
 import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.fabric.api.event.client.ClientTickCallback;
 import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.resource.language.I18n;
 import net.minecraft.client.resource.language.LanguageManager;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Language;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -37,6 +49,16 @@ public class MCTouchbar implements ClientModInitializer {
 		Widgets.init();
 
 		loadConfig(CFG_FILE);
+
+		ClientTickCallback.EVENT.register(client -> {
+			for(int i = 0; i < config.widgets.size(); i++) {
+				Widget w = config.widgets.get(i);
+				WidgetConfig c = config.config.get(i);
+
+				w.tick(c,i);
+			}
+		});
+
 		LOGGER.debug("MCTouchbar initialized");
 	}
 	public static void onWindowLoad(long handleOwO) {
@@ -44,11 +66,12 @@ public class MCTouchbar implements ClientModInitializer {
 	}
 	public static void regenTouchbar() {
 		jTouchBar = new JTouchBar();
+
 		for(int i = 0; i < config.widgets.size(); i++) {
 			Widget w = config.widgets.get(i);
 			WidgetConfig c = config.config.get(i);
 
-			w.addToTouchbar(jTouchBar);
+			w.addToTouchbar(jTouchBar,i,c);
 		}
 		jTouchBar.show(GLFWNativeCocoa.glfwGetCocoaWindow(handle));
 	}

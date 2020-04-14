@@ -9,15 +9,11 @@ import net.minecraft.text.TranslatableText;
 
 public class DebugWidget extends Widget {
 
-    public DebugWidget(WidgetConfigOutline outline) {
-        super();
-    }
-
     @Override
-    public void addToTouchbar(JTouchBar jTouchBar) {
-        super.addToTouchbar(jTouchBar);
+    public void addToTouchbar(JTouchBar jTouchBar, int index,  WidgetConfig config) {
+        super.addToTouchbar(jTouchBar, index, config);
 
-        addButtonToTouchbar(new TranslatableText("widget.mctouchbar.debug"), e -> {
+        this.addButtonToTouchbar(new TranslatableText("widget.mctouchbar.debug"), e -> {
             MinecraftClient.getInstance().options.debugEnabled = !MinecraftClient.getInstance().options.debugEnabled;
         });
     }
