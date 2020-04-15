@@ -1,14 +1,6 @@
 package io.github.Ashley1227.mctouchbar;
 
-import com.thizzer.jtouchbar.common.Image;
-import com.thizzer.jtouchbar.common.ImageAlignment;
-import com.thizzer.jtouchbar.common.ImageName;
-import com.thizzer.jtouchbar.item.view.TouchBarScrubber;
-import com.thizzer.jtouchbar.scrubber.ScrubberActionListener;
-import com.thizzer.jtouchbar.scrubber.ScrubberDataSource;
-import com.thizzer.jtouchbar.scrubber.view.ScrubberImageItemView;
-import com.thizzer.jtouchbar.scrubber.view.ScrubberTextItemView;
-import com.thizzer.jtouchbar.scrubber.view.ScrubberView;
+import com.thizzer.jtouchbar.JTouchBar;
 import io.github.Ashley1227.mctouchbar.config.MCTouchbarConfig;
 import io.github.Ashley1227.mctouchbar.widget.Widget;
 import io.github.Ashley1227.mctouchbar.widget.Widgets;
@@ -16,21 +8,9 @@ import io.github.Ashley1227.mctouchbar.widget.config.WidgetConfig;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.event.client.ClientTickCallback;
 import net.fabricmc.loader.api.FabricLoader;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.resource.language.I18n;
-import net.minecraft.client.resource.language.LanguageManager;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.util.Language;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 import org.lwjgl.glfw.GLFWNativeCocoa;
-
-import com.thizzer.jtouchbar.JTouchBar;
-import com.thizzer.jtouchbar.item.TouchBarItem;
-import com.thizzer.jtouchbar.item.view.TouchBarButton;
-import com.thizzer.jtouchbar.item.view.TouchBarView;
-import com.thizzer.jtouchbar.item.view.action.TouchBarViewAction;
 
 import java.io.File;
 

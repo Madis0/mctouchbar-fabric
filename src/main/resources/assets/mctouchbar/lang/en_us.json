@@ -27,5 +27,7 @@
   "widget.mctouchbar.test": "Test",
 
   "widget.mctouchbar.command": "Command",
-  "widget.mctouchbar.command.command": "Command"
+  "widget.mctouchbar.command.command": "Command",
+
+  "widget.common.title": "Title"
 }

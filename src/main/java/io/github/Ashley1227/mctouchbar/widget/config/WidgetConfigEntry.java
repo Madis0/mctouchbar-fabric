@@ -17,18 +17,34 @@ public class WidgetConfigEntry<T> {
         this.type = type;
         this.translationKey = translationKey;
     }
+
+    /**
+     * Sets the default value of the WidgetConfigEntry
+     * @return the WidgetConfigEntry object so you can chain it C:
+     */
     public WidgetConfigEntry setDefaultValue(T defaultValue) {
         this.defaultValue = defaultValue;
         return this;
     }
+
+    /**
+     * Set to the properties
+     * @return the WidgetConfigEntry object so you can chain it C:
+     */
     public WidgetConfigEntry<T> set(String key, Object to) {
         this.properties.put(key, to);
         return this;
     }
+    /**
+     * Get from the properties
+     */
     public Object get(String key) {
         return this.properties.get(key);
     }
 
+    /**
+     * Check if this entry has the properties given to it
+     */
     public boolean hasProperties(String... p) {
         int num = 0;
 

@@ -2,27 +2,26 @@ package io.github.Ashley1227.mctouchbar.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.module.SimpleModule;
-import io.github.Ashley1227.mctouchbar.MCTouchbar;
 import io.github.Ashley1227.mctouchbar.widget.Widget;
-import io.github.Ashley1227.mctouchbar.widget.WidgetDeserializer;
-import io.github.Ashley1227.mctouchbar.widget.WidgetSerializer;
 import io.github.Ashley1227.mctouchbar.widget.Widgets;
 import io.github.Ashley1227.mctouchbar.widget.config.WidgetConfig;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 @JsonDeserialize(using = MCTouchbarConfigDeserializer.class)
 public class MCTouchbarConfig {
-    public ArrayList<Widget> widgets = new ArrayList<>();
+    public List<Widget> widgets;
 
-    public ArrayList<WidgetConfig> config = new ArrayList<>();
+    public List<WidgetConfig> config;
 
     private ObjectMapper mapper = new ObjectMapper();
 
     public MCTouchbarConfig() {
+        this.widgets = new ArrayList<>();
+        this.config = new ArrayList<>();
     }
     public void generateUntil(int number) {
         while (this.widgets.size() < number) {
@@ -33,11 +32,11 @@ public class MCTouchbarConfig {
             this.config.add(WidgetConfig.fromOutline(Widgets.DEFAULT.outline));
         }
     }
-    public MCTouchbarConfig setWidgets(ArrayList<Widget> widgets) {
+    public MCTouchbarConfig setWidgets(List<Widget> widgets) {
         this.widgets = widgets;
         return this;
     }
-    public MCTouchbarConfig setConfig(ArrayList<WidgetConfig> config) {
+    public MCTouchbarConfig setConfig(List<WidgetConfig> config) {
         this.config = config;
         return this;
     }

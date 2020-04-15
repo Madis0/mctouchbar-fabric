@@ -2,7 +2,6 @@ package io.github.Ashley1227.mctouchbar.widget.widgets;
 
 import com.thizzer.jtouchbar.JTouchBar;
 import com.thizzer.jtouchbar.item.view.TouchBarTextField;
-import io.github.Ashley1227.mctouchbar.MCTouchbar;
 import io.github.Ashley1227.mctouchbar.widget.Widget;
 import io.github.Ashley1227.mctouchbar.widget.config.WidgetConfig;
 import net.minecraft.client.MinecraftClient;
@@ -28,7 +27,7 @@ public class HeadingWidget extends Widget {
         if(MinecraftClient.getInstance().player == null) {
             return " ";
         } else {
-            return Math.round(MinecraftClient.getInstance().player.yaw % 360) + "° ";
+            return Math.round(MinecraftClient.getInstance().player.yaw % 360) + "° " + MinecraftClient.getInstance().player.getHorizontalFacing();
         }
     }
 }

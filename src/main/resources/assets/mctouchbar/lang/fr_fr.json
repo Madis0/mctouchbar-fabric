@@ -1,0 +1,12 @@
+{
+  "title.mctouchbar.config": "Configuration de MCTouchbar",
+  "category.mctouchbar.general": "Général",
+
+  "widget.mctouchbar.debug": "Déverminer",
+  "widget.mctouchbar.test": "Essai",
+
+  "widget.mctouchbar.command": "Commande",
+  "widget.mctouchbar.command.command": "Commande",
+
+  "widget.common.title": "Titre"
+}

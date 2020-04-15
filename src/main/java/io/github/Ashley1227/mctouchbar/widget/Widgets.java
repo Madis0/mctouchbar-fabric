@@ -2,8 +2,6 @@ package io.github.Ashley1227.mctouchbar.widget;
 
 import io.github.Ashley1227.mctouchbar.MCTouchbar;
 import io.github.Ashley1227.mctouchbar.registry.MCTouchbarRegistry;
-import io.github.Ashley1227.mctouchbar.widget.config.WidgetConfigEntry;
-import io.github.Ashley1227.mctouchbar.widget.config.WidgetConfigEntryType;
 import io.github.Ashley1227.mctouchbar.widget.config.WidgetConfigOutline;
 import io.github.Ashley1227.mctouchbar.widget.widgets.CommandWidget;
 import io.github.Ashley1227.mctouchbar.widget.widgets.DebugWidget;

@@ -7,15 +7,13 @@ import io.github.Ashley1227.mctouchbar.widget.config.WidgetConfigEntry;
 import io.github.Ashley1227.mctouchbar.widget.config.WidgetConfigEntryType;
 import io.github.Ashley1227.mctouchbar.widget.config.WidgetConfigOutline;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableText;
 
 public class CommandWidget extends Widget {
 
     public CommandWidget() {
         super(new WidgetConfigOutline()
-                .addEntry(new WidgetConfigEntry(WidgetConfigEntryType.STRING,"widget.mctouchbar.command.command").setDefaultValue("say hi"))
-                .addEntry(new WidgetConfigEntry(WidgetConfigEntryType.STRING,"widget.mctouchbar.command.title").setDefaultValue("Execute"))
+                .addEntry(new WidgetConfigEntry(WidgetConfigEntryType.STRING,"widget.mctouchbar.command.command").setDefaultValue("/say hi"))
+                .addEntry(new WidgetConfigEntry(WidgetConfigEntryType.STRING,"widget.common.title").setDefaultValue("Execute"))
         );
     }
 
@@ -23,7 +21,7 @@ public class CommandWidget extends Widget {
     public void addToTouchbar(JTouchBar jTouchBar, int index, WidgetConfig config) {
         super.addToTouchbar(jTouchBar, index, config);
 
-        addButtonToTouchbar((String)config.get("widget.mctouchbar.command.title"), e -> {
+        addButtonToTouchbar((String)config.get("widget.common.title"), e -> {
             MinecraftClient.getInstance().player.sendChatMessage((String)config.get("widget.mctouchbar.command.command"));
         });
 

@@ -1,6 +1,5 @@
 package io.github.Ashley1227.mctouchbar;
 
-import io.github.Ashley1227.mctouchbar.config.MCTouchbarConfig;
 import io.github.Ashley1227.mctouchbar.registry.MCTouchbarRegistry;
 import io.github.Ashley1227.mctouchbar.widget.Widget;
 import io.github.Ashley1227.mctouchbar.widget.Widgets;
@@ -8,19 +7,16 @@ import io.github.Ashley1227.mctouchbar.widget.config.WidgetConfig;
 import io.github.Ashley1227.mctouchbar.widget.config.WidgetConfigEntry;
 import io.github.prospector.modmenu.api.ConfigScreenFactory;
 import io.github.prospector.modmenu.api.ModMenuApi;
+import me.shedaniel.clothconfig2.api.ConfigBuilder;
+import me.shedaniel.clothconfig2.api.ConfigCategory;
+import me.shedaniel.clothconfig2.api.ConfigEntryBuilder;
 import me.shedaniel.clothconfig2.gui.ClothConfigScreen;
 import me.shedaniel.clothconfig2.gui.entries.DropdownBoxEntry;
 import me.shedaniel.clothconfig2.impl.builders.DropdownMenuBuilder;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.Screen;
-
-import me.shedaniel.clothconfig2.api.ConfigBuilder;
-import me.shedaniel.clothconfig2.api.ConfigCategory;
-import me.shedaniel.clothconfig2.api.ConfigEntryBuilder;
-import net.minecraft.client.gui.screen.SettingsScreen;
 import net.minecraft.util.Identifier;
 
-import java.util.ArrayList;
 import java.util.stream.Collectors;
 
 public class MCTouchbarModMenuApiImpl implements ModMenuApi {
