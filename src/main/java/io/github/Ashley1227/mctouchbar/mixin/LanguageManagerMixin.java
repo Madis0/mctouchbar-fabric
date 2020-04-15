@@ -15,6 +15,7 @@ public class LanguageManagerMixin {
 
     @Inject(at = @At("TAIL"), method = "Lnet/minecraft/client/resource/language/LanguageManager;reloadResources(Ljava/util/List;)V")
     private void constructor(List<ResourcePack> list, CallbackInfo ci) {
-        MCTouchbar.regenTouchbar();
+        if(MCTouchbar.isMac)
+            MCTouchbar.regenTouchbar();
     }
 }

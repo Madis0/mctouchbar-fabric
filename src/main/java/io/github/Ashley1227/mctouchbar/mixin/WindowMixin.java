@@ -16,7 +16,8 @@ public class WindowMixin {
 
     @Inject(at = @At("TAIL"), method = "Lnet/minecraft/client/util/Window;<init>(Lnet/minecraft/client/WindowEventHandler;Lnet/minecraft/client/util/MonitorTracker;Lnet/minecraft/client/WindowSettings;Ljava/lang/String;Ljava/lang/String;)V")
     private void init(CallbackInfo info) {
-        MCTouchbar.onWindowLoad(this.handle);
+        if(MCTouchbar.isMac)
+            MCTouchbar.onWindowLoad(this.handle);
     }
 
 }

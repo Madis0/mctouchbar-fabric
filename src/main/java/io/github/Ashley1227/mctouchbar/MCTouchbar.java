@@ -24,22 +24,28 @@ public class MCTouchbar implements ClientModInitializer {
 
 	public static final Logger LOGGER = LogManager.getLogger(MCTouchbar.class);
 
+	public static boolean isMac = System.getProperty("os.name").toLowerCase().startsWith("mac");
+
 	@Override
 	public void onInitializeClient() {
-		Widgets.init();
+		if(isMac) {
+			Widgets.init();
 
-		loadConfig(CFG_FILE);
+			loadConfig(CFG_FILE);
 
-		ClientTickCallback.EVENT.register(client -> {
-			for(int i = 0; i < config.widgets.size(); i++) {
-				Widget w = config.widgets.get(i);
-				WidgetConfig c = config.config.get(i);
+			ClientTickCallback.EVENT.register(client -> {
+				for (int i = 0; i < config.widgets.size(); i++) {
+					Widget w = config.widgets.get(i);
+					WidgetConfig c = config.config.get(i);
 
-				w.tick(c,i);
-			}
-		});
+					w.tick(c, i);
+				}
+			});
 
-		LOGGER.debug("MCTouchbar initialized");
+			LOGGER.debug("MCTouchbar initialized");
+		} else {
+			LOGGER.info("Client is not running a Mac, skipping MCTouchbar initialization.");
+		}
 	}
 	public static void onWindowLoad(long handleOwO) {
 		handle = handleOwO;

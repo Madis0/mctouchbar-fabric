@@ -43,11 +43,5 @@ public class TestWidget extends Widget {
         });
         Random random = new Random();
         i[index] = random.nextInt(colors.length);
-//        addSliderToTouchbar(new TranslatableText("widget.mctouchbar.test.slider"), 0, 10, (slider,value) -> {
-//        });
-//        addTranslatableTextToTouchbar(new TranslatableText("text.mctouchbar.fortnite"));
-//        TouchBarButton button = addButtonToTouchbar(new TranslatableText("a" ),e -> {
-//            MCTouchbar.LOGGER.info(epic);
-//        });
     }
 }
