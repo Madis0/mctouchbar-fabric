@@ -1,0 +1,33 @@
+{
+  "title.mctouchbar.config": "MCTouchbar Config",
+  "category.mctouchbar.general": "General",
+  "config.mctouchbar.widget0": "Widget 0",
+  "config.mctouchbar.widget1": "Widget 1",
+  "config.mctouchbar.widget2": "Widget 2",
+  "config.mctouchbar.widget3": "Widget 3",
+  "config.mctouchbar.widget4": "Widget 4",
+  "config.mctouchbar.widget5": "Widget 5",
+  "config.mctouchbar.widget6": "Widget 6",
+  "config.mctouchbar.widget7": "Widget 7",
+  "config.mctouchbar.widget8": "Widget 8",
+  "config.mctouchbar.widget9": "Widget 9",
+
+  "category.mctouchbar.widget0": "0",
+  "category.mctouchbar.widget1": "1",
+  "category.mctouchbar.widget2": "2",
+  "category.mctouchbar.widget3": "3",
+  "category.mctouchbar.widget4": "4",
+  "category.mctouchbar.widget5": "5",
+  "category.mctouchbar.widget6": "6",
+  "category.mctouchbar.widget7": "7",
+  "category.mctouchbar.widget8": "8",
+  "category.mctouchbar.widget9": "9",
+
+  "widget.mctouchbar.debug": "Debug",
+  "widget.mctouchbar.test": "Test",
+
+  "widget.mctouchbar.command": "Command",
+  "widget.mctouchbar.command.command": "Command",
+
+  "widget.common.title": "Title"
+}
