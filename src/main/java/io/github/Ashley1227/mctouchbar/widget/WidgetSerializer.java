@@ -9,23 +9,23 @@ import java.io.IOException;
 
 public class WidgetSerializer extends StdSerializer<Widget> {
 
-    public WidgetSerializer() {
-        this(null);
-    }
+	public WidgetSerializer() {
+		this(null);
+	}
 
-    public WidgetSerializer(Class<Widget> t) {
-        super(t);
-    }
+	public WidgetSerializer(Class<Widget> t) {
+		super(t);
+	}
 
-    @Override
-    public void serialize(Widget widget, JsonGenerator jgen, SerializerProvider provider) throws IOException, JsonGenerationException {
-        jgen.writeStartObject();
+	@Override
+	public void serialize(Widget widget, JsonGenerator jgen, SerializerProvider provider) throws IOException, JsonGenerationException {
+		jgen.writeStartObject();
 
-        jgen.writeObjectFieldStart("identifier");
-        jgen.writeStringField("namespace", widget.getIdentifier().getNamespace());
-        jgen.writeStringField("path", widget.getIdentifier().getPath());
-        jgen.writeEndObject();
+		jgen.writeObjectFieldStart("identifier");
+		jgen.writeStringField("namespace", widget.getIdentifier().getNamespace());
+		jgen.writeStringField("path", widget.getIdentifier().getPath());
+		jgen.writeEndObject();
 
-        jgen.writeEndObject();
-    }
+		jgen.writeEndObject();
+	}
 }

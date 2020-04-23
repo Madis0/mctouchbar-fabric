@@ -19,34 +19,34 @@ import java.util.List;
 
 public class MCTouchbarConfigDeserializer extends StdDeserializer<MCTouchbarConfig> {
 
-    public MCTouchbarConfigDeserializer() {
-        this(null);
-    }
-    public MCTouchbarConfigDeserializer(Class<?> vc) {
-        super(vc);
-    }
+	public MCTouchbarConfigDeserializer() {
+		this(null);
+	}
+	public MCTouchbarConfigDeserializer(Class<?> vc) {
+		super(vc);
+	}
 
-    @Override
-    public MCTouchbarConfig deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException, JsonProcessingException {
-        ObjectMapper mapper = new ObjectMapper();
-        JsonNode node = jp.getCodec().readTree(jp);
-        WidgetDeserializer widgetDeserializer = new WidgetDeserializer();
+	@Override
+	public MCTouchbarConfig deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException, JsonProcessingException {
+		ObjectMapper mapper = new ObjectMapper();
+		JsonNode node = jp.getCodec().readTree(jp);
+		WidgetDeserializer widgetDeserializer = new WidgetDeserializer();
 
-        ArrayNode widgetsNode = (ArrayNode)node.get("widgets");
+		ArrayNode widgetsNode = (ArrayNode)node.get("widgets");
 
-        ArrayList<Widget> widgetsList = new ArrayList<>();
+		ArrayList<Widget> widgetsList = new ArrayList<>();
 
-        for(int i = 0; i < widgetsNode.size(); i++) {
-            JsonNode n = widgetsNode.get(i);
-            JsonParser p = mapper.getJsonFactory().createJsonParser(n.toString());
-            widgetsList.add(widgetDeserializer.deserialize(p, ctxt));
-        }
+		for(int i = 0; i < widgetsNode.size(); i++) {
+			JsonNode n = widgetsNode.get(i);
+			JsonParser p = mapper.getJsonFactory().createJsonParser(n.toString());
+			widgetsList.add(widgetDeserializer.deserialize(p, ctxt));
+		}
 
-        JsonNode configNode = node.get("config");
-        ObjectReader reader = mapper.readerFor(new TypeReference<List<WidgetConfig>>() {
-        });
-        List<WidgetConfig> list = reader.readValue(configNode);
+		JsonNode configNode = node.get("config");
+		ObjectReader reader = mapper.readerFor(new TypeReference<List<WidgetConfig>>() {
+		});
+		List<WidgetConfig> list = reader.readValue(configNode);
 
-        return new MCTouchbarConfig().setWidgets(widgetsList).setConfig(list);
-    }
+		return new MCTouchbarConfig().setWidgets(widgetsList).setConfig(list);
+	}
 }

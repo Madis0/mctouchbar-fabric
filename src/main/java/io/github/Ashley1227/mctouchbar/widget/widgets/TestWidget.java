@@ -15,33 +15,33 @@ import java.util.Random;
 
 public class TestWidget extends Widget {
 
-    private TouchBarButton[] buttons = new TouchBarButton[9];
-    private Color[] colors = {Color.RED,Color.ORANGE,Color.YELLOW,Color.GREEN,Color.BLUE,Color.PURPLE};
-    private int[] i = new int[9];
+	private TouchBarButton[] buttons = new TouchBarButton[9];
+	private Color[] colors = {Color.RED,Color.ORANGE,Color.YELLOW,Color.GREEN,Color.BLUE,Color.PURPLE};
+	private int[] i = new int[9];
 
-    public TestWidget() {
-        super(new WidgetConfigOutline()
+	public TestWidget() {
+		super(new WidgetConfigOutline()
 
-        );
+		);
 
-    }
+	}
 
-    @Override
-    public void tick(WidgetConfig config, int index) {
-        super.tick(config,index);
-        if(this.buttons != null && this.buttons[index] != null) {
-            this.buttons[index].setBezelColor(this.colors[++i[index] % colors.length]);
-        }
-    }
+	@Override
+	public void tick(WidgetConfig config, int index) {
+		super.tick(config,index);
+		if(this.buttons != null && this.buttons[index] != null) {
+			this.buttons[index].setBezelColor(this.colors[++i[index] % colors.length]);
+		}
+	}
 
-    @Override
-    public void addToTouchbar(JTouchBar jTouchBar, int index, WidgetConfig config) {
-        super.addToTouchbar(jTouchBar, index, config);
-        Screen screen = MinecraftClient.getInstance().currentScreen;
-        buttons[index] = addButtonToTouchbar(new TranslatableText("widget.mctouchbar.test"), e -> {
-            Util.getOperatingSystem().open("https://youtu.be/dQw4w9WgXcQ");
-        });
-        Random random = new Random();
-        i[index] = random.nextInt(colors.length);
-    }
+	@Override
+	public void addToTouchbar(JTouchBar jTouchBar, int index, WidgetConfig config) {
+		super.addToTouchbar(jTouchBar, index, config);
+		Screen screen = MinecraftClient.getInstance().currentScreen;
+		buttons[index] = addButtonToTouchbar(new TranslatableText("widget.mctouchbar.test"), e -> {
+			Util.getOperatingSystem().open("https://youtu.be/dQw4w9WgXcQ");
+		});
+		Random random = new Random();
+		i[index] = random.nextInt(colors.length);
+	}
 }

@@ -13,49 +13,49 @@ import java.util.List;
 
 @JsonDeserialize(using = MCTouchbarConfigDeserializer.class)
 public class MCTouchbarConfig {
-    public List<Widget> widgets;
+	public List<Widget> widgets;
 
-    public List<WidgetConfig> config;
+	public List<WidgetConfig> config;
 
-    private ObjectMapper mapper = new ObjectMapper();
+	private ObjectMapper mapper = new ObjectMapper();
 
-    public MCTouchbarConfig() {
-        this.widgets = new ArrayList<>();
-        this.config = new ArrayList<>();
-    }
-    public void generateUntil(int number) {
-        while (this.widgets.size() < number) {
-            this.widgets.add(Widgets.DEFAULT);
+	public MCTouchbarConfig() {
+		this.widgets = new ArrayList<>();
+		this.config = new ArrayList<>();
+	}
+	public void generateUntil(int number) {
+		while (this.widgets.size() < number) {
+			this.widgets.add(Widgets.DEFAULT);
 
-        }
-        while (this.config.size() < number) {
-            this.config.add(WidgetConfig.fromOutline(Widgets.DEFAULT.outline));
-        }
-    }
-    public MCTouchbarConfig setWidgets(List<Widget> widgets) {
-        this.widgets = widgets;
-        return this;
-    }
-    public MCTouchbarConfig setConfig(List<WidgetConfig> config) {
-        this.config = config;
-        return this;
-    }
-    public MCTouchbarConfig writeToJSON(File f) {
-        try {
-            mapper.writerWithDefaultPrettyPrinter().writeValue(f,this);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return this;
-    }
+		}
+		while (this.config.size() < number) {
+			this.config.add(WidgetConfig.fromOutline(Widgets.DEFAULT.outline));
+		}
+	}
+	public MCTouchbarConfig setWidgets(List<Widget> widgets) {
+		this.widgets = widgets;
+		return this;
+	}
+	public MCTouchbarConfig setConfig(List<WidgetConfig> config) {
+		this.config = config;
+		return this;
+	}
+	public MCTouchbarConfig writeToJSON(File f) {
+		try {
+			mapper.writerWithDefaultPrettyPrinter().writeValue(f,this);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return this;
+	}
 
-    public MCTouchbarConfig readFromJSON(File f) {
-        try {
-            MCTouchbarConfig cfg = mapper.readValue(f,MCTouchbarConfig.class);
-            return cfg;
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return this;
-    }
+	public MCTouchbarConfig readFromJSON(File f) {
+		try {
+			MCTouchbarConfig cfg = mapper.readValue(f,MCTouchbarConfig.class);
+			return cfg;
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return this;
+	}
 }
