@@ -1,4 +1,4 @@
-package io.github.ashley1227.mctouchbar.widget;
+package io.github.Ashley1227.mctouchbar.widget;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -6,8 +6,8 @@ import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
-import io.github.ashley1227.mctouchbar.MCTouchbar;
-import io.github.ashley1227.mctouchbar.registry.MCTouchbarRegistry;
+import io.github.Ashley1227.mctouchbar.MCTouchbar;
+import io.github.Ashley1227.mctouchbar.registry.MCTouchbarRegistry;
 import net.minecraft.util.Identifier;
 
 import java.io.IOException;

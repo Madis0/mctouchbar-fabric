@@ -1,17 +1,16 @@
-package io.github.ashley1227.mctouchbar.widget;
+package io.github.Ashley1227.mctouchbar.widget;
 
-import io.github.ashley1227.mctouchbar.MCTouchbar;
-import io.github.ashley1227.mctouchbar.registry.MCTouchbarRegistry;
-import io.github.ashley1227.mctouchbar.widget.config.WidgetConfigOutline;
-import io.github.ashley1227.mctouchbar.widget.widgets.*;
+import io.github.Ashley1227.mctouchbar.MCTouchbar;
+import io.github.Ashley1227.mctouchbar.registry.MCTouchbarRegistry;
+import io.github.Ashley1227.mctouchbar.widget.config.WidgetConfigOutline;
+import io.github.Ashley1227.mctouchbar.widget.widgets.*;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
 public class Widgets {
 	public static Widget NONE = new Widget(new WidgetConfigOutline());
-	public static Widget TEST = new TestWidget();
 
-	public static Widget HOTBAR = new HotbarWidget();
+	public static Widget TEST = new TestWidget();
 
 	public static Widget DEBUG = new DebugWidget();
 	public static Widget SUPER_DEBUG = new SuperDebugWidget();
@@ -25,8 +24,6 @@ public class Widgets {
 	public static void init() {
 		Registry.register(MCTouchbarRegistry.WIDGET, new Identifier(MCTouchbar.MODID,"none"), NONE);
 		Registry.register(MCTouchbarRegistry.WIDGET, new Identifier(MCTouchbar.MODID,"test"), TEST);
-
-		Registry.register(MCTouchbarRegistry.WIDGET, new Identifier(MCTouchbar.MODID,"hotbar"), HOTBAR);
 
 		Registry.register(MCTouchbarRegistry.WIDGET, new Identifier(MCTouchbar.MODID,"debug"), DEBUG);
 		Registry.register(MCTouchbarRegistry.WIDGET, new Identifier(MCTouchbar.MODID,"super_debug"), SUPER_DEBUG);

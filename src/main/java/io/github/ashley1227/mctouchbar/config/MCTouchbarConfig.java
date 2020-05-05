@@ -1,10 +1,10 @@
-package io.github.ashley1227.mctouchbar.config;
+package io.github.Ashley1227.mctouchbar.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import io.github.ashley1227.mctouchbar.widget.Widget;
-import io.github.ashley1227.mctouchbar.widget.Widgets;
-import io.github.ashley1227.mctouchbar.widget.config.WidgetConfig;
+import io.github.Ashley1227.mctouchbar.widget.Widget;
+import io.github.Ashley1227.mctouchbar.widget.Widgets;
+import io.github.Ashley1227.mctouchbar.widget.config.WidgetConfig;
 
 import java.io.File;
 import java.io.IOException;

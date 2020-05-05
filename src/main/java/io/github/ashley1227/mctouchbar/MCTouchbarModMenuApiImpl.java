@@ -1,10 +1,11 @@
-package io.github.ashley1227.mctouchbar;
+package io.github.Ashley1227.mctouchbar;
 
-import io.github.ashley1227.mctouchbar.registry.MCTouchbarRegistry;
-import io.github.ashley1227.mctouchbar.widget.Widget;
-import io.github.ashley1227.mctouchbar.widget.Widgets;
-import io.github.ashley1227.mctouchbar.widget.config.WidgetConfig;
-import io.github.ashley1227.mctouchbar.widget.config.WidgetConfigEntry;
+import io.github.Ashley1227.mctouchbar.registry.MCTouchbarRegistry;
+import io.github.Ashley1227.mctouchbar.util.FramebufferUtils;
+import io.github.Ashley1227.mctouchbar.widget.Widget;
+import io.github.Ashley1227.mctouchbar.widget.Widgets;
+import io.github.Ashley1227.mctouchbar.widget.config.WidgetConfig;
+import io.github.Ashley1227.mctouchbar.widget.config.WidgetConfigEntry;
 import io.github.prospector.modmenu.api.ConfigScreenFactory;
 import io.github.prospector.modmenu.api.ModMenuApi;
 import me.shedaniel.clothconfig2.api.ConfigBuilder;
@@ -111,7 +112,7 @@ public class MCTouchbarModMenuApiImpl implements ModMenuApi {
 			TouchBarManager.saveConfig();
 			MinecraftClient.getInstance().openScreen(this.create(this.parentScreen));
 
-			TouchBarManager.reloadTouchbar();
+			TouchBarManager.regenTouchbar();
 
 				ItemRenderer ir = MinecraftClient.getInstance().getItemRenderer();
 

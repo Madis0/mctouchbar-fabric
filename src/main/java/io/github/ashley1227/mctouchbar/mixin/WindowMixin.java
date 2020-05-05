@@ -1,7 +1,6 @@
-package io.github.ashley1227.mctouchbar.mixin;
+package io.github.Ashley1227.mctouchbar.mixin;
 
-import io.github.ashley1227.mctouchbar.MCTouchbar;
-import net.minecraft.client.MinecraftClient;
+import io.github.Ashley1227.mctouchbar.MCTouchbar;
 import net.minecraft.client.util.Window;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -17,7 +16,7 @@ public class WindowMixin {
 
 	@Inject(at = @At("TAIL"), method = "Lnet/minecraft/client/util/Window;<init>(Lnet/minecraft/client/WindowEventHandler;Lnet/minecraft/client/util/MonitorTracker;Lnet/minecraft/client/WindowSettings;Ljava/lang/String;Ljava/lang/String;)V")
 	private void init(CallbackInfo info) {
-		if(MinecraftClient.getInstance().IS_SYSTEM_MAC)
+		if(MCTouchbar.isMac)
 			MCTouchbar.onWindowLoad(this.handle);
 	}
 

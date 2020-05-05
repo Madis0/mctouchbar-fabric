@@ -1,4 +1,4 @@
-package io.github.ashley1227.mctouchbar.widget.config;
+package io.github.Ashley1227.mctouchbar.widget.config;
 
 import java.util.ArrayList;
 

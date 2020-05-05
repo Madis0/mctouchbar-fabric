@@ -20,9 +20,9 @@
   "environment": "*",
   "entrypoints": {
     "client": [
-      "io.github.Ashley1227.mctouchbar.MCTouchbar"
+      "io.github.ashley1227.mctouchbar.MCTouchbar"
     ], "modmenu": [
-      "io.github.Ashley1227.mctouchbar.MCTouchbarModMenuApiImpl"
+      "io.github.ashley1227.mctouchbar.MCTouchbarModMenuApiImpl"
     ]
 
   },

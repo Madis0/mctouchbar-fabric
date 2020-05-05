@@ -1,41 +1,29 @@
-package io.github.ashley1227.mctouchbar.widget;
+package io.github.Ashley1227.mctouchbar.widget;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.thizzer.jtouchbar.JTouchBar;
 import com.thizzer.jtouchbar.common.Color;
-import com.thizzer.jtouchbar.common.Image;
-import com.thizzer.jtouchbar.common.ImageAlignment;
-import com.thizzer.jtouchbar.common.ImageName;
 import com.thizzer.jtouchbar.item.TouchBarItem;
 import com.thizzer.jtouchbar.item.view.TouchBarButton;
-import com.thizzer.jtouchbar.item.view.TouchBarScrubber;
 import com.thizzer.jtouchbar.item.view.TouchBarSlider;
 import com.thizzer.jtouchbar.item.view.TouchBarTextField;
+import com.thizzer.jtouchbar.item.view.TouchBarView;
 import com.thizzer.jtouchbar.item.view.action.TouchBarViewAction;
-import com.thizzer.jtouchbar.scrubber.ScrubberActionListener;
-import com.thizzer.jtouchbar.scrubber.ScrubberDataSource;
-import com.thizzer.jtouchbar.scrubber.view.ScrubberImageItemView;
-import com.thizzer.jtouchbar.scrubber.view.ScrubberTextItemView;
-import com.thizzer.jtouchbar.scrubber.view.ScrubberView;
 import com.thizzer.jtouchbar.slider.SliderActionListener;
-import io.github.ashley1227.mctouchbar.registry.MCTouchbarRegistry;
-import io.github.ashley1227.mctouchbar.util.FramebufferUtils;
-import io.github.ashley1227.mctouchbar.widget.config.WidgetConfig;
-import io.github.ashley1227.mctouchbar.widget.config.WidgetConfigOutline;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.network.ClientPlayerEntity;
+import io.github.Ashley1227.mctouchbar.MCTouchbar;
+import io.github.Ashley1227.mctouchbar.registry.MCTouchbarRegistry;
+import io.github.Ashley1227.mctouchbar.widget.config.WidgetConfig;
+import io.github.Ashley1227.mctouchbar.widget.config.WidgetConfigOutline;
 import net.minecraft.client.resource.language.I18n;
-import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Identifier;
+import org.lwjgl.glfw.GLFWNativeCocoa;
 
-import java.io.FileInputStream;
-import java.io.IOException;
 import java.io.Serializable;
-import java.util.List;
 
 @JsonSerialize(using = WidgetSerializer.class)
 
@@ -57,25 +45,22 @@ public class Widget implements Serializable {
 	public Widget() {
 		this(new WidgetConfigOutline());
 	}
-
 	public Widget(WidgetConfigOutline outline) {
 		this.outline = outline;
 	}
-
 	public WidgetConfigOutline getOutline() {
 		return this.outline;
 	}
-
 	public Identifier getIdentifier() {
 		return MCTouchbarRegistry.WIDGET.getId(this);
 	}
 
 	/**
 	 * @param jTouchBar JTouchBar instance that's being added to
-	 * @param index     index of the widget being added in the configuration
-	 * @param config    the widget's configuration
-	 *                  <p>
-	 *                  Called when the TouchBar gets reloaded.
+	 * @param index index of the widget being added in the configuration
+	 * @param config the widget's configuration
+	 *
+	 *               Called when the TouchBar gets reloaded.
 	 */
 	public void addToTouchbar(JTouchBar jTouchBar, int index, WidgetConfig config) {
 		this.jTouchBar = jTouchBar;
@@ -85,16 +70,16 @@ public class Widget implements Serializable {
 
 	/**
 	 * @param config the configuration of the widget being ticked
-	 * @param index  the index of the widget being ticked
-	 *               <p>
-	 *               Called every client-side tick for every widget in your config.
+	 * @param index the index of the widget being ticked
+	 *
+	 *              Called every client-side tick for every widget in your config.
 	 */
 	public void tick(WidgetConfig config, int index) {
 
 	}
 
 	/**
-	 * @param title  the label of the button you're adding
+	 * @param title the label of the button you're adding
 	 * @param action lambda expression to be executed when you press the button. Takes an event parameter, but it's not really useful
 	 *               Adds a button to the TouchBar
 	 * @return the TouchBarButton object that was just generated
@@ -107,9 +92,8 @@ public class Widget implements Serializable {
 		this.jTouchBar.addItem(new TouchBarItem(title + this.index, btn));
 		return btn;
 	}
-
 	/**
-	 * @param title  the TranslatableText object that will determine the button's label
+	 * @param title the TranslatableText object that will determine the button's label
 	 * @param action lambda expression to be executed when you press the button. Takes an event parameter, but it's not really useful
 	 *               Adds a button to the TouchBar
 	 * @return the TouchBarButton object that was just generated
@@ -138,10 +122,8 @@ public class Widget implements Serializable {
 
 		return slider;
 	}
-
 	/**
-	 * Adds a Minecraft Text object to the TouchBar
-	 *
+	 *            Adds a Minecraft Text object to the TouchBar
 	 * @return the TouchBarTextField that was just generated
 	 */
 	public TouchBarTextField addTextToTouchbar(Text text) {
@@ -156,8 +138,7 @@ public class Widget implements Serializable {
 	}
 
 	/**
-	 * Adds a string to the TouchBar
-	 *
+	 *            Adds a string to the TouchBar
 	 * @param translatable if the first argument is a translation key or not
 	 * @return the TouchBarTextField that was just generated
 	 */
@@ -172,30 +153,6 @@ public class Widget implements Serializable {
 		return textField;
 	}
 
-	public TouchBarScrubber addScrubberToTouchbar(String str, boolean translatable, ScrubberActionListener actionListener, List<Image> images) {
-		// scrubber
-		TouchBarScrubber touchBarScrubber = new TouchBarScrubber();
-		touchBarScrubber.setActionListener(actionListener);
-		touchBarScrubber.setDataSource(new ScrubberDataSource() {
-			@Override
-			public ScrubberView getViewForIndex(TouchBarScrubber scrubber, long index) {
-				ScrubberImageItemView imageItemView = new ScrubberImageItemView();
-				imageItemView.setIdentifier(str + index);
-
-				imageItemView.setImage(images.get((int)index));
-				imageItemView.setAlignment(ImageAlignment.CENTER);
-				return imageItemView;
-			}
-
-			@Override
-			public int getNumberOfItems(TouchBarScrubber scrubber) {
-				return images.size();
-			}
-		});
-
-		jTouchBar.addItem(new TouchBarItem(str + this.index, touchBarScrubber, true));
-		return touchBarScrubber;
-	}
 
 	public String toString() {
 		return this.getIdentifier().toString();

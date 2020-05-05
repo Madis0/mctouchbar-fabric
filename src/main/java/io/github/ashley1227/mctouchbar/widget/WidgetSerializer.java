@@ -1,4 +1,4 @@
-package io.github.ashley1227.mctouchbar.widget;
+package io.github.Ashley1227.mctouchbar.widget;
 
 import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.core.JsonGenerator;

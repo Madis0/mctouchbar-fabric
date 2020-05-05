@@ -1,7 +1,7 @@
-package io.github.ashley1227.mctouchbar.mixin;
+package io.github.Ashley1227.mctouchbar.mixin;
 
-import io.github.ashley1227.mctouchbar.TouchBarManager;
-import net.minecraft.client.MinecraftClient;
+import io.github.Ashley1227.mctouchbar.MCTouchbar;
+import io.github.Ashley1227.mctouchbar.TouchBarManager;
 import net.minecraft.client.resource.language.LanguageManager;
 import net.minecraft.resource.ResourcePack;
 import org.spongepowered.asm.mixin.Mixin;
@@ -16,7 +16,7 @@ public class LanguageManagerMixin {
 
 	@Inject(at = @At("TAIL"), method = "Lnet/minecraft/client/resource/language/LanguageManager;reloadResources(Ljava/util/List;)V")
 	private void constructor(List<ResourcePack> list, CallbackInfo ci) {
-		if(MinecraftClient.getInstance().IS_SYSTEM_MAC)
-			TouchBarManager.reloadTouchbar();
+		if(MCTouchbar.isMac)
+			TouchBarManager.regenTouchbar();
 	}
 }

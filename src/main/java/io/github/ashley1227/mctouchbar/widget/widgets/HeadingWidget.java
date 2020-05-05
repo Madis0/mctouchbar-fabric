@@ -1,9 +1,9 @@
-package io.github.ashley1227.mctouchbar.widget.widgets;
+package io.github.Ashley1227.mctouchbar.widget.widgets;
 
 import com.thizzer.jtouchbar.JTouchBar;
 import com.thizzer.jtouchbar.item.view.TouchBarTextField;
-import io.github.ashley1227.mctouchbar.widget.Widget;
-import io.github.ashley1227.mctouchbar.widget.config.WidgetConfig;
+import io.github.Ashley1227.mctouchbar.widget.Widget;
+import io.github.Ashley1227.mctouchbar.widget.config.WidgetConfig;
 import net.minecraft.client.MinecraftClient;
 
 public class HeadingWidget extends Widget {

@@ -1,32 +1,32 @@
-package io.github.ashley1227.mctouchbar.util;
+package io.github.Ashley1227.mctouchbar.util;
 
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.thizzer.jtouchbar.common.Image;
-import com.thizzer.jtouchbar.common.ImageName;
-import io.github.ashley1227.mctouchbar.MCTouchbar;
+import io.github.Ashley1227.mctouchbar.MCTouchbar;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gl.Framebuffer;
 import net.minecraft.client.gui.DrawableHelper;
-import net.minecraft.client.render.BufferBuilder;
-import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.item.ItemRenderer;
-import net.minecraft.client.render.model.BakedModel;
-import net.minecraft.client.render.model.json.ModelTransformation;
-import net.minecraft.client.util.math.Matrix3f;
-import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.client.util.math.Vector3f;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.math.Quaternion;
+import net.minecraft.item.Items;
 import org.lwjgl.BufferUtils;
+import org.lwjgl.glfw.GLFW;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
+import org.lwjgl.opengl.GL30;
+import org.lwjgl.opengl.GL40;
 
 import javax.imageio.ImageIO;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.nio.ByteBuffer;
+
 import java.nio.IntBuffer;
 import java.util.Arrays;
 
@@ -73,15 +73,6 @@ public class FramebufferUtils extends DrawableHelper {
 //        Image image = new Image(pixelValues);
 		return bufferedimage;
 	}
-//    public static NativeImage getImageFromFrameBuffer(Framebuffer framebuffer, int width, int height) {
-//        width = framebuffer.textureWidth;
-//        height = framebuffer.textureHeight;
-//        NativeImage nativeImage = new NativeImage(width, height, false);
-//        RenderSystem.bindTexture(framebuffer.depthAttachment);
-//        nativeImage.loadFromTextureImage(0, true);
-//        nativeImage.mirrorVertically();
-//        return nativeImage;
-//    }
 
 	public static byte[] getImgBytes(BufferedImage image) {
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -106,11 +97,7 @@ public class FramebufferUtils extends DrawableHelper {
 	}
 
 	public static Image getItemStackImg(ItemStack stack, int outputSize) {
-		if (stack == null)
-			return new Image(ImageName.NSImageNameTouchBarColorPickerFill, false);
-
 		Framebuffer fb = renderItem(stack, outputSize);
-
 
 		Image image = new Image(
 				getImgBytes(
@@ -119,7 +106,6 @@ public class FramebufferUtils extends DrawableHelper {
 								outputSize, outputSize)
 				)
 		);
-//		Image image = new Image(fb.)
 		if (fb != MinecraftClient.getInstance().getFramebuffer()) {
 //            fb.delete();
 		}
@@ -140,71 +126,32 @@ public class FramebufferUtils extends DrawableHelper {
 		MCTouchbar.LOGGER.info("saving pic" + MCTouchbar.i);
 	}
 
-	public static void renderItemThing(Framebuffer mb, ItemStack stack, int outputSize) {
+	public static void renderItemThing(ItemStack stack, int outputSize) {
 		if (itemRenderer == null)
-//            itemRenderer = new ItemRenderer(MinecraftClient.getInstance().getTextureManager(), MinecraftClient.getInstance().getBakedModelManager(), ItemColors.create(BlockColors.create()));
 			itemRenderer = MinecraftClient.getInstance().getItemRenderer();
-//		RenderSystem.scalef(MinecraftClient.getInstance().getFramebuffer().viewportHeight/MinecraftClient.getInstance().getFramebuffer().viewportWidth, 1, 1f);
-//		RenderSystem.loadIdentity();
-
-//		itemRenderer.renderGuiItemIcon(stack, 0, 0);
-//		itemRenderer.renderGuiItemOverlay(MinecraftClient.getInstance().textRenderer, stack, 0, 0, "e");
-
-		MatrixStack matrices = new MatrixStack();
-		BufferBuilder builder = new BufferBuilder(4096);
-//
-		drawItem(64, 64, outputSize, stack, matrices, VertexConsumerProvider.immediate(builder), 15728880, stack.getCount());
+		itemRenderer.renderGuiItemIcon(stack, 0, 0);
+		itemRenderer.renderGuiItemOverlay(MinecraftClient.getInstance().textRenderer, stack, 0, 0, "e");
 	}
 
-	public static void drawItem(double x, double y, float scale, ItemStack stack, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay) {
-		matrices.push();
-		matrices.translate(x, y, 0.0001);
-		matrices.translate(0, 0, -0.01);
-		matrices.multiply(new Quaternion(Vector3f.NEGATIVE_Z, 180, true));
-		matrices.multiply(new Quaternion(Vector3f.NEGATIVE_Y, 180, true));
-		matrices.scale(scale, scale, 0.0001f);
-
-		if (vertexConsumers instanceof VertexConsumerProvider.Immediate)
-			((VertexConsumerProvider.Immediate) vertexConsumers).draw();
-
-		BakedModel model = MinecraftClient.getInstance().getItemRenderer().getModels().getModel(stack);
-		if (model.hasDepth())
-			RenderSystem.setupGui3DDiffuseLighting();
-		else
-			RenderSystem.setupGuiFlatDiffuseLighting();
-		matrices.peek().getNormal().load(Matrix3f.scale(1, -1, 1));
-		MinecraftClient.getInstance().getItemRenderer().renderItem(stack, ModelTransformation.Mode.GUI, light, overlay, matrices, vertexConsumers);
-
-		if (vertexConsumers instanceof VertexConsumerProvider.Immediate)
-			((VertexConsumerProvider.Immediate) vertexConsumers).draw();
-		matrices.pop();
-	}
 
 	private static Framebuffer FRAME_BUFFER;
-//	private static int prevGuiScale;
 
 	public static Framebuffer renderItem(ItemStack stack, int outputSize) {
+		MCTouchbar.LOGGER.info("renderItem " + stack);
 		Framebuffer mb = MinecraftClient.getInstance().getFramebuffer();
 
-		if (FRAME_BUFFER == null) {
-//			FRAME_BUFFER = new Framebuffer(64, 64, true, true);
-			FRAME_BUFFER = new Framebuffer(512, 512, true, true);
-
-//			FRAME_BUFFER = new Framebuffer(mb.viewportWidth, mb.viewportHeight, true, true);
-//			prevGuiScale = MinecraftClient.getInstance().options.guiScale;
+		if (FRAME_BUFFER == null){
+			FRAME_BUFFER = new Framebuffer(mb.viewportWidth, mb.viewportHeight, true, true);
 		}
 
 		Framebuffer fb = FRAME_BUFFER;
-//		fb.resize(mb.viewportWidth, mb.viewportHeight, true);
 
 		fb.clear(true);
 		fb.beginWrite(true);
-
-		RenderSystem.pushMatrix();
-		renderItemThing(mb, stack, outputSize);
-
+//        RenderSystem.pushMatrix();
+		renderItemThing(stack, outputSize);
+//        RenderSystem.popMatrix();
 		mb.beginWrite(true);
-		RenderSystem.popMatrix();
 
 		MCTouchbar.LOGGER.info("renderItem" + MCTouchbar.i);
 

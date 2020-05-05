@@ -1,11 +1,14 @@
-package io.github.ashley1227.mctouchbar.widget.widgets;
+package io.github.Ashley1227.mctouchbar.widget.widgets;
 
+import com.mojang.blaze3d.systems.RenderSystem;
 import com.thizzer.jtouchbar.JTouchBar;
 import com.thizzer.jtouchbar.common.Image;
 import com.thizzer.jtouchbar.item.view.TouchBarButton;
-import io.github.ashley1227.mctouchbar.widget.Widget;
-import io.github.ashley1227.mctouchbar.widget.config.WidgetConfig;
+import io.github.Ashley1227.mctouchbar.util.FramebufferUtils;
+import io.github.Ashley1227.mctouchbar.widget.Widget;
+import io.github.Ashley1227.mctouchbar.widget.config.WidgetConfig;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.text.TranslatableText;
 
 public class DebugWidget extends Widget {
 	public TouchBarButton button;

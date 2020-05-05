@@ -1,8 +1,8 @@
-package io.github.ashley1227.mctouchbar.registry;
+package io.github.Ashley1227.mctouchbar.registry;
 
 
-import io.github.ashley1227.mctouchbar.MCTouchbar;
-import io.github.ashley1227.mctouchbar.widget.Widget;
+import io.github.Ashley1227.mctouchbar.MCTouchbar;
+import io.github.Ashley1227.mctouchbar.widget.Widget;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.DefaultedRegistry;
 import net.minecraft.util.registry.MutableRegistry;
