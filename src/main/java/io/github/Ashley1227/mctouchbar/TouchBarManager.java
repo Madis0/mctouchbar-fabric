@@ -46,9 +46,11 @@ public class TouchBarManager {
 
 //        addScrubber();
 
-		for (Widget w : widgets) {
+		/*for (Widget w : widgets) {
 			w.addToTouchbar(jTouchBar);
-		}
+		}*/
+		widgets[1].addToTouchbar(jTouchBar);
+		widgets[3].addToTouchbar(jTouchBar);
 		jTouchBar.show(GLFWNativeCocoa.glfwGetCocoaWindow(handle));
 	}
 	private static void addScrubber() {
