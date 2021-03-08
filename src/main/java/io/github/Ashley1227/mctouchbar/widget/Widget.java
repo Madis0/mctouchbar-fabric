@@ -10,8 +10,6 @@ import com.thizzer.jtouchbar.item.view.TouchBarView;
 import com.thizzer.jtouchbar.item.view.action.TouchBarViewAction;
 import com.thizzer.jtouchbar.slider.SliderActionListener;
 import io.github.Ashley1227.mctouchbar.MCTouchbar;
-import io.github.Ashley1227.mctouchbar.widget.config.WidgetConfig;
-import io.github.Ashley1227.mctouchbar.widget.config.WidgetConfigOutline;
 import net.minecraft.client.resource.language.I18n;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
@@ -20,18 +18,9 @@ import org.lwjgl.glfw.GLFWNativeCocoa;
 
 public class Widget {
 
-	public WidgetConfigOutline outline;
-
 	protected JTouchBar jTouchBar;
 
 	public Widget() {
-		this(new WidgetConfigOutline());
-	}
-	public Widget(WidgetConfigOutline outline) {
-		this.outline = outline;
-	}
-	public WidgetConfigOutline getOutline() {
-		return this.outline;
 	}
 
 	/**

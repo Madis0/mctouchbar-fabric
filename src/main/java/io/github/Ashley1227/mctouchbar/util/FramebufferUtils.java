@@ -123,7 +123,7 @@ public class FramebufferUtils extends DrawableHelper {
 //            fb.delete();
 		}
 
-		MCTouchbar.LOGGER.info("saving pic" + MCTouchbar.i);
+		MCTouchbar.LOGGER.info("saving pic");
 	}
 
 	public static void renderItemThing(ItemStack stack, int outputSize) {
@@ -153,7 +153,7 @@ public class FramebufferUtils extends DrawableHelper {
 //        RenderSystem.popMatrix();
 		mb.beginWrite(true);
 
-		MCTouchbar.LOGGER.info("renderItem" + MCTouchbar.i);
+		MCTouchbar.LOGGER.info("renderItem");
 
 		File f = new File("pics/" + i++ + ".png");
 		f.getParentFile().mkdirs();

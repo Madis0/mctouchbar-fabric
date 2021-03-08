@@ -17,12 +17,17 @@ import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.fabricmc.fabric.api.event.client.ClientTickCallback;
 import net.fabricmc.loader.api.FabricLoader;
+import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
+import net.fabricmc.fabric.api.resource.SimpleSynchronousResourceReloadListener;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.render.item.ItemRenderer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.resource.ResourceManager;
+import net.minecraft.resource.ResourceType;
+import net.minecraft.util.Identifier;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.lwjgl.glfw.GLFWNativeCocoa;
@@ -31,7 +36,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 
-public class MCTouchbar extends DrawableHelper implements ClientModInitializer {
+public class MCTouchbar extends DrawableHelper implements ClientModInitializer, SimpleSynchronousResourceReloadListener {
 
 	public static final String MODID = "mctouchbar";
 
@@ -39,28 +44,28 @@ public class MCTouchbar extends DrawableHelper implements ClientModInitializer {
 
 	public static boolean isMac = System.getProperty("os.name").toLowerCase().startsWith("mac");
 
-	@Deprecated
-	public static int i = 0;
-
 	@Override
 	public void onInitializeClient() {
 		if (isMac) {
 			TouchBarManager.init();
-
-			HudRenderCallback.EVENT.register((e, a) -> {
-				TextRenderer renderer = MinecraftClient.getInstance().textRenderer;
-				//renderer.draw(Integer.toString(i), 0, 0, 0xffffff); // TODO: reenable
-				i++;
-			});
-			LOGGER.debug("MCTouchbar initialized");
+			ResourceManagerHelper.get(ResourceType.CLIENT_RESOURCES).registerReloadListener(this);
+			LOGGER.info("MCTouchbar initialized");
 		} else {
 			LOGGER.info("Client is not running a Mac, skipping MCTouchbar initialization.");
 		}
-
-
 	}
 
 	public static void onWindowLoad(long handleOwO) {
 		TouchBarManager.handle = handleOwO;
+	}
+
+	@Override
+	public void apply(ResourceManager manager) {
+		TouchBarManager.regenTouchbar();
+	}
+
+	@Override
+	public Identifier getFabricId() {
+		return new Identifier(MODID, "mod_initializer");
 	}
 }

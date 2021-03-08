@@ -4,7 +4,6 @@ import com.thizzer.jtouchbar.JTouchBar;
 import com.thizzer.jtouchbar.item.view.TouchBarButton;
 import io.github.Ashley1227.mctouchbar.util.FramebufferUtils;
 import io.github.Ashley1227.mctouchbar.widget.Widget;
-import io.github.Ashley1227.mctouchbar.widget.config.WidgetConfig;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 
