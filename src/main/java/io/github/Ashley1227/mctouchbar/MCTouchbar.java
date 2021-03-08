@@ -11,14 +11,10 @@ import com.thizzer.jtouchbar.scrubber.ScrubberDataSource;
 import com.thizzer.jtouchbar.scrubber.view.ScrubberImageItemView;
 import com.thizzer.jtouchbar.scrubber.view.ScrubberTextItemView;
 import com.thizzer.jtouchbar.scrubber.view.ScrubberView;
-import io.github.Ashley1227.mctouchbar.config.MCTouchbarConfig;
 import io.github.Ashley1227.mctouchbar.util.FramebufferUtils;
 import io.github.Ashley1227.mctouchbar.widget.Widget;
-import io.github.Ashley1227.mctouchbar.widget.Widgets;
-import io.github.Ashley1227.mctouchbar.widget.config.WidgetConfig;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
-import net.fabricmc.fabric.api.event.client.ClientSpriteRegistryCallback;
 import net.fabricmc.fabric.api.event.client.ClientTickCallback;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.MinecraftClient;
@@ -49,8 +45,6 @@ public class MCTouchbar extends DrawableHelper implements ClientModInitializer {
 	@Override
 	public void onInitializeClient() {
 		if (isMac) {
-			Widgets.init();
-
 			TouchBarManager.init();
 
 			HudRenderCallback.EVENT.register((e, a) -> {

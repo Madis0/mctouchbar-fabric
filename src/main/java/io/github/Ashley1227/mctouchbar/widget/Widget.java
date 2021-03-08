@@ -1,9 +1,5 @@
 package io.github.Ashley1227.mctouchbar.widget;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.thizzer.jtouchbar.JTouchBar;
 import com.thizzer.jtouchbar.common.Color;
 import com.thizzer.jtouchbar.item.TouchBarItem;
@@ -14,7 +10,6 @@ import com.thizzer.jtouchbar.item.view.TouchBarView;
 import com.thizzer.jtouchbar.item.view.action.TouchBarViewAction;
 import com.thizzer.jtouchbar.slider.SliderActionListener;
 import io.github.Ashley1227.mctouchbar.MCTouchbar;
-import io.github.Ashley1227.mctouchbar.registry.MCTouchbarRegistry;
 import io.github.Ashley1227.mctouchbar.widget.config.WidgetConfig;
 import io.github.Ashley1227.mctouchbar.widget.config.WidgetConfigOutline;
 import net.minecraft.client.resource.language.I18n;
@@ -23,23 +18,10 @@ import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Identifier;
 import org.lwjgl.glfw.GLFWNativeCocoa;
 
-import java.io.Serializable;
+public class Widget {
 
-@JsonSerialize(using = WidgetSerializer.class)
-
-@JsonDeserialize(using = WidgetDeserializer.class)
-public class Widget implements Serializable {
-
-	@JsonIgnore
 	public WidgetConfigOutline outline;
 
-	@JsonIgnore
-	protected WidgetConfig config;
-
-	@JsonIgnore
-	protected int index;
-
-	@JsonIgnore
 	protected JTouchBar jTouchBar;
 
 	public Widget() {
@@ -51,31 +33,18 @@ public class Widget implements Serializable {
 	public WidgetConfigOutline getOutline() {
 		return this.outline;
 	}
-	public Identifier getIdentifier() {
-		return MCTouchbarRegistry.WIDGET.getId(this);
-	}
 
 	/**
 	 * @param jTouchBar JTouchBar instance that's being added to
-	 * @param index index of the widget being added in the configuration
 	 * @param config the widget's configuration
 	 *
 	 *               Called when the TouchBar gets reloaded.
 	 */
-	public void addToTouchbar(JTouchBar jTouchBar, int index, WidgetConfig config) {
+	public void addToTouchbar(JTouchBar jTouchBar) {
 		this.jTouchBar = jTouchBar;
-		this.config = config;
-		this.index = index;
 	}
 
-	/**
-	 * @param config the configuration of the widget being ticked
-	 * @param index the index of the widget being ticked
-	 *
-	 *              Called every client-side tick for every widget in your config.
-	 */
-	public void tick(WidgetConfig config, int index) {
-
+	public void tick() {
 	}
 
 	/**
@@ -89,7 +58,7 @@ public class Widget implements Serializable {
 		btn.setTitle(translatable ? I18n.translate(title) : title);
 		btn.setAction(action);
 		btn.setBezelColor(Color.DARK_GRAY);
-		this.jTouchBar.addItem(new TouchBarItem(title + this.index, btn));
+		this.jTouchBar.addItem(new TouchBarItem(title, btn));
 		return btn;
 	}
 	/**
@@ -106,7 +75,7 @@ public class Widget implements Serializable {
 
 		btn.setBezelColor(Color.DARK_GRAY);
 
-		this.jTouchBar.addItem(new TouchBarItem(title.asString() + this.index, btn));
+		this.jTouchBar.addItem(new TouchBarItem(title.asString(), btn));
 
 		return btn;
 	}
@@ -118,7 +87,7 @@ public class Widget implements Serializable {
 
 		slider.setActionListener(actionListener);
 
-		this.jTouchBar.addItem(new TouchBarItem(title.asString() + this.index, slider));
+		this.jTouchBar.addItem(new TouchBarItem(title.asString(), slider));
 
 		return slider;
 	}
@@ -132,7 +101,7 @@ public class Widget implements Serializable {
 		TouchBarTextField textField = new TouchBarTextField();
 		textField.setStringValue(title == null ? "" : title);
 
-		this.jTouchBar.addItem(new TouchBarItem(title + this.index, textField));
+		this.jTouchBar.addItem(new TouchBarItem(title, textField));
 
 		return textField;
 	}
@@ -148,13 +117,8 @@ public class Widget implements Serializable {
 		TouchBarTextField textField = new TouchBarTextField();
 		textField.setStringValue(title == null ? "" : title);
 
-		this.jTouchBar.addItem(new TouchBarItem(title + this.index, textField));
+		this.jTouchBar.addItem(new TouchBarItem(title, textField));
 
 		return textField;
-	}
-
-
-	public String toString() {
-		return this.getIdentifier().toString();
 	}
 }

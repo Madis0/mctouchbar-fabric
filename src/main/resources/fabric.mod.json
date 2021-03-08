@@ -21,9 +21,6 @@
   "entrypoints": {
     "client": [
       "io.github.Ashley1227.mctouchbar.MCTouchbar"
-    ],
-    "modmenu": [
-      "io.github.Ashley1227.mctouchbar.MCTouchbarModMenuApiImpl"
     ]
   },
   "mixins": ["mctouchbar.mixins.json"],

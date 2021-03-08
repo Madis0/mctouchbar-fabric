@@ -10,9 +10,8 @@ import com.thizzer.jtouchbar.scrubber.ScrubberDataSource;
 import com.thizzer.jtouchbar.scrubber.view.ScrubberImageItemView;
 import com.thizzer.jtouchbar.scrubber.view.ScrubberTextItemView;
 import com.thizzer.jtouchbar.scrubber.view.ScrubberView;
-import io.github.Ashley1227.mctouchbar.config.MCTouchbarConfig;
 import io.github.Ashley1227.mctouchbar.widget.Widget;
-import io.github.Ashley1227.mctouchbar.widget.config.WidgetConfig;
+import io.github.Ashley1227.mctouchbar.widget.widgets.*;
 import net.fabricmc.fabric.api.event.client.ClientTickCallback;
 import net.fabricmc.loader.api.FabricLoader;
 import org.lwjgl.glfw.GLFWNativeCocoa;
@@ -22,20 +21,23 @@ import java.io.FileInputStream;
 import java.io.IOException;
 
 public class TouchBarManager {
-	public static MCTouchbarConfig config = new MCTouchbarConfig();
-	public static final File CFG_FILE = new File(FabricLoader.getInstance().getConfigDirectory(), "mctouchbar.json");
+	protected static long handle;
+	private static JTouchBar jTouchBar;
 
-	public static long handle;
-	public static JTouchBar jTouchBar;
+	private static Widget[] widgets;
 
 	public static void init() {
-		loadConfig();
-		ClientTickCallback.EVENT.register(client -> {
-			for (int i = 0; i < config.widgets.size(); i++) {
-				Widget w = config.widgets.get(i);
-				WidgetConfig c = config.config.get(i);
+		widgets = new Widget[] {
+			new TestWidget(),
+			new DebugWidget(),
+			new SuperDebugWidget(),
+			new HeadingWidget(),
+//			new CommandWidget("Execute", "/say hi");
+		};
 
-				w.tick(c, i);
+		ClientTickCallback.EVENT.register(client -> {
+			for (Widget w : widgets) {
+				w.tick();
 			}
 		});
 	}
@@ -44,11 +46,8 @@ public class TouchBarManager {
 
 //        addScrubber();
 
-		for (int i = 0; i < config.widgets.size(); i++) {
-			Widget w = config.widgets.get(i);
-			WidgetConfig c = config.config.get(i);
-
-			w.addToTouchbar(jTouchBar, i, c);
+		for (Widget w : widgets) {
+			w.addToTouchbar(jTouchBar);
 		}
 		jTouchBar.show(GLFWNativeCocoa.glfwGetCocoaWindow(handle));
 	}
@@ -108,16 +107,5 @@ public class TouchBarManager {
 		});
 
 		jTouchBar.addItem(new TouchBarItem("Scrubber_1", touchBarScrubber, true));
-	}
-	public static void loadConfig() {
-		config = config.readFromJSON(CFG_FILE);
-		if (config == null) {
-			config = new MCTouchbarConfig();
-		}
-		config.generateUntil(10);
-	}
-
-	public static void saveConfig() {
-		config.writeToJSON(CFG_FILE);
 	}
 }

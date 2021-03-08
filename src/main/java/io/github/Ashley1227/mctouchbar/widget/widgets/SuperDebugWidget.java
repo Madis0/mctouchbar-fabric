@@ -16,15 +16,15 @@ public class SuperDebugWidget extends Widget {
 	}
 
 	@Override
-	public void tick(WidgetConfig config, int index) {
-		super.tick(config, index);
+	public void tick() {
+		super.tick();
 //        if(button != null)
 
 	}
 
 	@Override
-	public void addToTouchbar(JTouchBar jTouchBar, int index, WidgetConfig config) {
-		super.addToTouchbar(jTouchBar, index, config);
+	public void addToTouchbar(JTouchBar jTouchBar) {
+		super.addToTouchbar(jTouchBar);
 		button = addButtonToTouchbar("widget.mctouchbar.debug", true, e -> {
 			button.setImage(FramebufferUtils.getItemStackImg(Math.random() > 0.9 ? new ItemStack(Items.ACACIA_LOG) : new ItemStack(Items.ACACIA_DOOR), 64));
 		});
