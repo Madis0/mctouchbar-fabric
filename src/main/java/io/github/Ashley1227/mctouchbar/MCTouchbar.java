@@ -43,7 +43,6 @@ public class MCTouchbar extends DrawableHelper implements ClientModInitializer {
 
 	public static boolean isMac = System.getProperty("os.name").toLowerCase().startsWith("mac");
 
-
 	@Deprecated
 	public static int i = 0;
 
@@ -54,9 +53,9 @@ public class MCTouchbar extends DrawableHelper implements ClientModInitializer {
 
 			TouchBarManager.init();
 
-			HudRenderCallback.EVENT.register(e -> {
+			HudRenderCallback.EVENT.register((e, a) -> {
 				TextRenderer renderer = MinecraftClient.getInstance().textRenderer;
-				renderer.draw(Integer.toString(i), 0, 0, 0xffffff);
+				//renderer.draw(Integer.toString(i), 0, 0, 0xffffff); // TODO: reenable
 				i++;
 			});
 			LOGGER.debug("MCTouchbar initialized");

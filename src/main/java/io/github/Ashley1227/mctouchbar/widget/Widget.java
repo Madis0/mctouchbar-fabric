@@ -100,7 +100,7 @@ public class Widget implements Serializable {
 	 */
 	public TouchBarButton addButtonToTouchbar(Text title, TouchBarViewAction action) {
 		TouchBarButton btn = new TouchBarButton();
-		btn.setTitle(title.asFormattedString());
+		btn.setTitle(title.asString());
 
 		btn.setAction(action);
 
@@ -127,7 +127,7 @@ public class Widget implements Serializable {
 	 * @return the TouchBarTextField that was just generated
 	 */
 	public TouchBarTextField addTextToTouchbar(Text text) {
-		String title = text.asFormattedString();
+		String title = text.asString();
 
 		TouchBarTextField textField = new TouchBarTextField();
 		textField.setStringValue(title == null ? "" : title);
