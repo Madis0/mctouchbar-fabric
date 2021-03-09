@@ -1,5 +1,6 @@
 package io.github.Ashley1227.mctouchbar;
 
+import io.github.Ashley1227.mctouchbar.bars.LanguageScreenBar;
 import io.github.Ashley1227.mctouchbar.bars.ScreenTouchBar;
 import io.github.Ashley1227.mctouchbar.bars.TickableTouchBar;
 import io.github.Ashley1227.mctouchbar.bars.TitleScreenBar;
@@ -12,6 +13,8 @@ import net.fabricmc.fabric.api.event.client.ClientTickCallback;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.TitleScreen;
+import net.minecraft.client.gui.screen.option.LanguageOptionsScreen;
+import net.minecraft.client.gui.screen.world.SelectWorldScreen;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -25,6 +28,8 @@ public class TouchBarManager {
 	public enum CurrentBar {
 		None,
 		TitleBar,
+		LanguageBar,
+		SelectWorldBar,
 		InGameBar,
 	}
 	public CurrentBar currentBarType;
@@ -73,6 +78,16 @@ public class TouchBarManager {
 			currentBarType = CurrentBar.TitleBar;
 			currentScreenBar = new TitleScreenBar(currentScreen);
 			currentScreenBar.show();
+		} else if (currentScreen instanceof LanguageOptionsScreen && currentBarType != CurrentBar.LanguageBar) {
+			currentBarType = CurrentBar.LanguageBar;
+			currentScreenBar = new LanguageScreenBar(currentScreen);
+			currentScreenBar.show();
+		} else if (currentScreen instanceof SelectWorldScreen && currentBarType != CurrentBar.SelectWorldBar) {
+
+		} else {
+			// There should not be a TouchBar?
+			// TODO: what to do about ticks after redrawing?
+			//currentScreenBar.hide();
 		}
 
 		/*jTouchBar_Game = new JTouchBar();
