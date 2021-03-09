@@ -42,12 +42,12 @@ public class MCTouchbar extends DrawableHelper implements ClientModInitializer, 
 
 	public static final Logger LOGGER = LogManager.getLogger(MCTouchbar.class);
 
-	public static boolean isMac = System.getProperty("os.name").toLowerCase().startsWith("mac");
+	public static boolean isMac = MinecraftClient.IS_SYSTEM_MAC;
 
 	@Override
 	public void onInitializeClient() {
 		if (isMac) {
-			TouchBarManager.init();
+			TouchBarManager.Manager.init();
 			ResourceManagerHelper.get(ResourceType.CLIENT_RESOURCES).registerReloadListener(this);
 			LOGGER.info("MCTouchbar initialized");
 		} else {
@@ -61,7 +61,7 @@ public class MCTouchbar extends DrawableHelper implements ClientModInitializer, 
 
 	@Override
 	public void apply(ResourceManager manager) {
-		TouchBarManager.regenTouchbar();
+		TouchBarManager.Manager.regenTouchbar();
 	}
 
 	@Override

@@ -21,6 +21,7 @@ public class HeadingWidget extends Widget {
 	public void addToTouchbar(JTouchBar jTouchBar) {
 		super.addToTouchbar(jTouchBar);
 		this.textField = addStringToTouchbar(getHeadingString(), false);
+		this.textField.setStringValue(" -000° ");
 	}
 	public String getHeadingString() {
 		if(MinecraftClient.getInstance().player == null) {
